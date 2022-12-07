@@ -1,0 +1,45 @@
+name: ltb (lint,test => build)
+on: [push, workflow_dispatch]
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: install nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version : 18 
+      - name: install dependency
+        run: npm ci 
+      - name: linting
+        run : npm run lint
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo 
+        uses: actions/checkout@v3
+      - name: instal nodejs
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: install dependency
+        run : npm ci
+      - name: testing
+        run: npm run test
+  build: 
+    needs: test
+    runs-on: ubuntu-latest  
+      steps:
+        - name: checkout repo 
+          uses: actions/checkout@V3
+        - name: install node js
+          uses: actions/setup-node@v3
+          with: 
+            node-version: 18
+        - name: install dependency
+          run: npm ci
+        - name: buildig
+          run: npm run build                 
+        - name: done
+          run: echo "building is done. ready to deploy"
