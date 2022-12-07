@@ -1,0 +1,20 @@
+name: job output
+on: 
+  workflow_dispatch: 
+jobs:
+  producer:
+    runs-on: ubuntu-latest
+    outputs:
+      int: ${{ steps.produce.outputs.int }}
+    steps:
+      - name: echo produced value
+        run: echo "We produce 10 this identifir int"
+      - name: actual set outputing
+        id: produce
+        run: echo "::set-output name=int::10"  
+  consumer:
+    runs-on: ubuntu-latest
+    needs: producer
+    steps:
+      - name: consume job output
+        run: echo "${{ needs.producer.outputs.int }}" 
