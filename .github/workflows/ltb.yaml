@@ -30,16 +30,16 @@ jobs:
   build: 
     needs: test
     runs-on: ubuntu-latest  
-      steps:
-        - name: checkout repo 
-          uses: actions/checkout@V3
-        - name: install node js
-          uses: actions/setup-node@v3
-          with: 
-            node-version: 18
-        - name: install dependency
-          run: npm ci
-        - name: buildig
-          run: npm run build                 
-        - name: done
-          run: echo "building is done. ready to deploy"
+    steps:
+      - name: checkout repo 
+        uses: actions/checkout@V3
+      - name: install node js
+        uses: actions/setup-node@v3
+        with: 
+          node-version: 18
+      - name: install dependency
+        run: npm ci
+      - name: buildig
+        run: npm run build                 
+      - name: done
+        run: echo "building is done. ready to deploy"
