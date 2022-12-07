@@ -43,3 +43,8 @@ jobs:
         run: npm run build                 
       - name: done
         run: echo "building is done. ready to deploy"
+      - name: create artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: artifact
+          path: dist  
